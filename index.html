@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kunshi — 3D Portfolio & Creative Realm</title>
+    <meta name="description" content="A modern Ghibli-inspired 3D portfolio demo featuring procedural landscapes, real-time lighting, interactive soot sprites, and scrollytelling." />
+    
+    <!-- Google Fonts Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍃</text></svg>" />
+  </head>
+  <body data-theme="day">
+    <!-- Custom Ghibli Cursor -->
+    <div class="custom-cursor" id="custom-cursor"></div>
+
+    <!-- Fixed 3D WebGL Canvas Backdrop -->
+    <div id="canvas-container"></div>
+
+    <!-- Floating Navigation Bar -->
+    <header class="nav-header interactive-content">
+      <a href="#hero" class="nav-brand" id="nav-brand-link">
+        <span class="brand-icon">🍃</span>
+        <div>
+          <span class="brand-name">Kunshi</span>
+          <span class="brand-kanji"> / 薫志</span>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#projects" class="nav-link">Projects</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Time of Day Switcher -->
+        <div class="theme-switch-group" title="Shift Time of Day">
+          <button class="theme-btn active" data-time="day" title="Day (Totoro Meadow)">☀️</button>
+          <button class="theme-btn" data-time="sunset" title="Golden Sunset (Howl's Twilight)">🌅</button>
+          <button class="theme-btn" data-time="night" title="Starlit Night (Spirited Fireflies)">🌙</button>
+        </div>
+
+        <!-- Audio Toggle (Procedural Web Audio Synthesizer) -->
+        <button class="audio-btn" id="audio-toggle-btn" title="Toggle Ghibli Music Box Ambience">
+          <span class="sound-bars">
+            <span class="sound-bar"></span>
+            <span class="sound-bar"></span>
+            <span class="sound-bar"></span>
+          </span>
+          <span id="audio-status-label">Chimes Off</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Scrollytelling Page Structure -->
+    <main class="page-container">
+      
+      <!-- 1. HERO SECTION (STARTS WITH NAME) -->
+      <section id="hero" class="section hero-section interactive-content">
+        <div class="section-inner">
+          <div class="hero-badge">
+            <span class="pulse-dot"></span>
+            <span>Available for Creative Engineering & Adventures</span>
+          </div>
+
+          <div class="hero-name-wrap">
+            <span class="hero-kanji-sub">薫志 • Creative Technologist</span>
+            <h1 class="hero-title" id="hero-name-display">Kunshi</h1>
+          </div>
+
+          <p class="hero-tagline">
+            Crafting whimsical 3D worlds, real-time shaders, and thoughtful software.
+          </p>
+
+          <p class="hero-description">
+            Welcome to my realm inspired by the wonder of Studio Ghibli. Scroll to explore my journey, inspect selected works, or dispatch a spirit letter into the sky.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#projects" class="btn-primary" id="explore-projects-btn">
+              <span>View Expeditions</span>
+              <span>→</span>
+            </a>
+            <a href="#about" class="btn-secondary">
+              <span>The Explorer's Tale</span>
+            </a>
+            <button class="btn-secondary" id="edit-profile-btn" title="Quickly tweak name or bio">
+              <span>⚙️ Customize Profile</span>
+            </button>
+          </div>
+
+          <div class="hero-scroll-hint">
+            <span>↓ Scroll gently to begin the voyage</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. ABOUT SECTION -->
+      <section id="about" class="section interactive-content">
+        <div class="section-inner">
+          <div class="about-grid">
+            
+            <!-- Story & Philosophy Column -->
+            <div class="parchment-card">
+              <span class="section-label">Chapter 01</span>
+              <h2 class="section-title">The Explorer’s Tale</h2>
+              
+              <p class="story-lead">
+                Bridging rigorous computer science with the poetic whimsy of cinematic storytelling.
+              </p>
+
+              <p class="story-body">
+                Just as Studio Ghibli crafts worlds filled with hand-painted heart and living wind, I believe digital products should feel alive, welcoming, and purposeful. I specialize in building immersive WebGL scenes, high-performance web applications, and intuitive user interfaces that leave a lasting impression.
+              </p>
+
+              <div class="journey-milestones">
+                <div class="milestone-item">
+                  <span class="milestone-year">2024 — Present</span>
+                  <div class="milestone-info">
+                    <h4>Lead 3D & Creative Engineer</h4>
+                    <p>Pioneering browser-based GPU rendering, real-time procedural environments, and next-generation UI interactions.</p>
+                  </div>
+                </div>
+
+                <div class="milestone-item">
+                  <span class="milestone-year">2022 — 2024</span>
+                  <div class="milestone-info">
+                    <h4>Full-Stack & Graphics Specialist</h4>
+                    <p>Engineered responsive web applications, custom shader pipelines, and scalable enterprise architectures.</p>
+                  </div>
+                </div>
+
+                <div class="milestone-item">
+                  <span class="milestone-year">2020 — 2022</span>
+                  <div class="milestone-info">
+                    <h4>Creative Computing & Design</h4>
+                    <p>Designed experimental interactive experiences, data visualizations, and creative tools.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Craft & Quote Column -->
+            <div class="craft-cards">
+              
+              <!-- 3D & Graphics -->
+              <div class="craft-card">
+                <div class="craft-header">
+                  <span class="craft-icon">✨</span>
+                  <h3 class="craft-title">3D & Creative Tech</h3>
+                </div>
+                <div class="tags-cluster">
+                  <span class="tag-pill">Three.js</span>
+                  <span class="tag-pill">WebGL / GLSL</span>
+                  <span class="tag-pill">Procedural Shaders</span>
+                  <span class="tag-pill">Web Audio API</span>
+                  <span class="tag-pill">Blender 3D</span>
+                  <span class="tag-pill">Physics & Particles</span>
+                </div>
+              </div>
+
+              <!-- Web Architecture -->
+              <div class="craft-card">
+                <div class="craft-header">
+                  <span class="craft-icon">🌿</span>
+                  <h3 class="craft-title">Engineering & Architecture</h3>
+                </div>
+                <div class="tags-cluster">
+                  <span class="tag-pill">TypeScript</span>
+                  <span class="tag-pill">Modern Vanilla CSS</span>
+                  <span class="tag-pill">Vite</span>
+                  <span class="tag-pill">Web Performance</span>
+                  <span class="tag-pill">Responsive Design</span>
+                  <span class="tag-pill">Accessibility (a11y)</span>
+                </div>
+              </div>
+
+              <!-- Ghibli Philosophy Quote -->
+              <div class="quote-card">
+                <p>“Always believe in yourself. Do this and no matter where you are, you will have nothing to fear.”</p>
+                <span class="quote-author">— The Cat Returns (Studio Ghibli)</span>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. PROJECTS SECTION -->
+      <section id="projects" class="section interactive-content">
+        <div class="section-inner">
+          
+          <div class="projects-header">
+            <span class="section-label">Chapter 02</span>
+            <h2 class="section-title">Curated Expeditions</h2>
+            <p class="story-body">
+              A selection of interactive realms, graphics experiments, and modern applications built with love and precision.
+            </p>
+          </div>
+
+          <div class="projects-grid" id="projects-container">
+            <!-- Populated via JavaScript with 3D tilt effects -->
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 4. CONTACT SECTION (VALLEY POST OFFICE) -->
+      <section id="contact" class="section interactive-content">
+        <div class="section-inner">
+          
+          <div class="contact-grid">
+            
+            <!-- Post Office Letter Card -->
+            <div class="contact-letter-card">
+              <div class="letter-header">
+                <div>
+                  <span class="section-label">Chapter 03</span>
+                  <h2 class="section-title" style="margin-bottom: 0.3rem;">Valley Dispatch</h2>
+                  <p style="color: var(--text-muted); font-size: 0.95rem;">Send a spirit letter across the horizon</p>
+                </div>
+                
+                <!-- Airmail Stamp -->
+                <div class="letter-stamp">
+                  <span class="stamp-graphic">🕊️</span>
+                  <span class="stamp-text">AIRMAIL</span>
+                </div>
+              </div>
+
+              <form class="contact-form" id="contact-form">
+                <div class="form-group">
+                  <label class="form-label" for="sender-name">Your Name or Alias</label>
+                  <input type="text" id="sender-name" class="form-input" placeholder="e.g. Chihiro / Sophie Hatter" required />
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="sender-email">Your Electronic Pigeon (Email)</label>
+                  <input type="email" id="sender-email" class="form-input" placeholder="sophie@movingcastle.sky" required />
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="sender-message">Your Message</label>
+                  <textarea id="sender-message" class="form-textarea" placeholder="Write your thoughts, prospective collaborations, or warm greetings..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn-send" id="submit-letter-btn">
+                  <span>Dispatch Paper Airplane</span>
+                  <span>✈️</span>
+                </button>
+              </form>
+            </div>
+
+            <!-- Contact Aside / Direct Links -->
+            <div class="contact-aside">
+              <div class="parchment-card" style="padding: 2rem;">
+                <h3 style="font-family: var(--font-display); font-size: 1.4rem; margin-bottom: 0.8rem;">Direct Signals</h3>
+                <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 1.5rem;">
+                  Prefer direct communication? Whether you have a project idea, want to talk 3D shaders, or simply want to say hello, feel free to reach out anytime.
+                </p>
+
+                <div class="connect-links">
+                  <button class="connect-btn" id="copy-email-btn" title="Click to copy email">
+                    <div class="connect-btn-left">
+                      <span class="connect-btn-icon">✉️</span>
+                      <div>
+                        <div style="font-size: 0.85rem; color: var(--text-muted);">Direct Email</div>
+                        <div style="font-size: 1rem;" id="display-email">kunshi@demo-realm.studio</div>
+                      </div>
+                    </div>
+                    <span style="font-size: 0.85rem; color: var(--accent-gold);">Copy 📋</span>
+                  </button>
+
+                  <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="connect-btn">
+                    <div class="connect-btn-left">
+                      <span class="connect-btn-icon">🐙</span>
+                      <div>
+                        <div style="font-size: 0.85rem; color: var(--text-muted);">Code Repository</div>
+                        <div style="font-size: 1rem;">GitHub Profile</div>
+                      </div>
+                    </div>
+                    <span>↗</span>
+                  </a>
+
+                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="connect-btn">
+                    <div class="connect-btn-left">
+                      <span class="connect-btn-icon">💼</span>
+                      <div>
+                        <div style="font-size: 0.85rem; color: var(--text-muted);">Professional Guild</div>
+                        <div style="font-size: 1rem;">LinkedIn Network</div>
+                      </div>
+                    </div>
+                    <span>↗</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="site-footer">
+        <span class="footer-spirit">🌟</span>
+        <p class="footer-text">“Life is a wisp of wind, so let us build things that make it dance.”</p>
+        <p class="footer-sub">Crafted with Three.js & Vanilla Web Standards. Inspired by Studio Ghibli.</p>
+        <a href="#hero" class="btn-top" id="back-to-top">
+          <span>↑ Fly to the Summit</span>
+        </a>
+      </footer>
+
+    </main>
+
+    <!-- Interactive Project Modal -->
+    <div class="modal-backdrop" id="project-modal">
+      <div class="modal-box">
+        <button class="modal-close-btn" id="modal-close-btn" aria-label="Close modal">✕</button>
+        <div id="modal-content">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Profile Personalization Modal -->
+    <div class="modal-backdrop" id="profile-modal">
+      <div class="modal-box">
+        <button class="modal-close-btn" id="profile-modal-close" aria-label="Close modal">✕</button>
+        <h3 style="font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 0.5rem;">Personalize Portfolio</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">Customize your name, tagline, and email instantly.</p>
+        
+        <form id="profile-customizer-form" style="display: flex; flex-direction: column; gap: 1rem;">
+          <div class="form-group">
+            <label class="form-label" for="input-custom-name">Display Name</label>
+            <input type="text" id="input-custom-name" class="form-input" value="Kunshi" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="input-custom-title">Japanese / Sub Title</label>
+            <input type="text" id="input-custom-title" class="form-input" value="薫志 • Creative Technologist & 3D Engineer" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="input-custom-email">Contact Email</label>
+            <input type="email" id="input-custom-email" class="form-input" value="kunshi@demo-realm.studio" required />
+          </div>
+          <button type="submit" class="btn-primary" style="align-self: flex-start; margin-top: 0.5rem;">
+            <span>Save Updates</span>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Toast Feedback Notification -->
+    <div class="toast-notification" id="toast-message">
+      <span id="toast-icon">✨</span>
+      <span id="toast-text">Notification message</span>
+    </div>
+
+    <!-- Application Entry Point -->
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
